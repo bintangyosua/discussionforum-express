@@ -1,0 +1,8 @@
+[build]
+    command = "npm run start"
+    publish = "dist"
+
+[[redirects]]
+    from = "/*"
+    to = "/api"
+    status = 200
