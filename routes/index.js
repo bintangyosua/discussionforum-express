@@ -6,6 +6,7 @@ const router = express.Router();
 const adminRouter = require('./admin');
 const userRouter = require('./user');
 const threadRouter = require('./thread');
+const signRouter = require('./sign');
 
 
 // Route utama
@@ -25,6 +26,7 @@ router.get('/', (req, res) => {
 router.use('/', adminRouter);
 router.use('/', userRouter);
 router.use('/', threadRouter);
+router.use('/', signRouter);
 
 
 

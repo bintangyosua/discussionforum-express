@@ -4,9 +4,10 @@ const routes = require('./routes');
 const app = express();
 const db = require('./config/database.js');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 
-const port = 443; // Port untuk rest api kita
+const port = 3000; // Port untuk rest api kita
 
 
 // Set template engine
@@ -15,6 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 app.use(express.json());
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
 
