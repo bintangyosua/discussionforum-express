@@ -23,5 +23,5 @@ app.use(express.static('public'));
 
 
 app.listen(port, () => {
-    console.log('Server berjalan di http://localhost:3000/');
+    console.log(`Server berjalan di http://localhost:${port}/`);
 });
