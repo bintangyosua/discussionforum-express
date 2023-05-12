@@ -6,7 +6,7 @@ const db = require('./config/database.js');
 const path = require('path');
 
 
-const port = 3000; // Port untuk rest api kita
+const port = 443; // Port untuk rest api kita
 
 
 // Set template engine
