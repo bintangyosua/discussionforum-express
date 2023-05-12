@@ -5,6 +5,7 @@ const app = express();
 const db = require('./config/database.js');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 
 const port = 3000; // Port untuk rest api kita
@@ -18,6 +19,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
+app.use(session({
+    secret: 'sashiko',
+    resave: false,
+    saveUninitialized: false
+}))
 
 
 app.use('/api', routes);

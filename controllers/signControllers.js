@@ -1,17 +1,6 @@
 const { runQuery } = require('../config/database');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-
-const generateToken = (user) => {
-    const payload = {
-        id_user: user.id_user,
-        password_user: user.password_user
-    };
-
-    const token = jwt.sign(payload, 'sashiko', { expiresIn: '1m' });
-    return token;
-}
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
 
 
 exports.signUp = async (req, res) => {
@@ -27,7 +16,8 @@ exports.signUp = async (req, res) => {
             return res.status(409).json({ message: 'user_id already exists' });
         } else {
             try {
-                await bcrypt.hash(password_user, 10)
+                req.session.id_user = id_user;
+                req.session.id_password = id_password;;
 
                 const createUserQuery = 'INSERT INTO user VALUES (?, ?)';
                 const values = [id_user, password_user];
@@ -60,12 +50,11 @@ exports.signIn = async (req, res) => {
 
         if (result.length > 0) {
             try {
-                await bcrypt.compare(password_user, result[0].password_user)
-
-                const token = generateToken(result[0]);
-                res.status(200).json({ token });
+                req.session.id_user = id_user;
+                req.session.id_password = password_user;
+                res.status(200).json({ message: 'Succesfully signin' });
             } catch (err) {
-                console.error(error);
+                console.error(err);
                 res.status(401).json({ error: 'Authentication failed' });
             }
         } else  {
@@ -79,6 +68,16 @@ exports.signIn = async (req, res) => {
 
 
 exports.logOut = async (req, res) => {
+    
+    try {
+        console.log(`sebelum dihancurkan: ${req.session}`)
+        req.session.destroy()
+        console.log(`setelah dihancurkan: ${req.session}`)
 
-    res.cookie('jwt', '', { expires: new Date(0)}).status(200).end();
+        res.redirect('/api')
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+
 }

@@ -7,6 +7,7 @@ const adminRouter = require('./admin');
 const userRouter = require('./user');
 const threadRouter = require('./thread');
 const signRouter = require('./sign');
+const profileRouter= require('./profile');
 
 
 // Route utama
@@ -27,6 +28,7 @@ router.use('/', adminRouter);
 router.use('/', userRouter);
 router.use('/', threadRouter);
 router.use('/', signRouter);
+router.use('/', profileRouter);
 
 
 
