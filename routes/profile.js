@@ -1,9 +1,8 @@
-const { isAuthenticated } = require('../middlewares/authSession');
-const { getProfile } = require('../controllers/profileControllers');
-const expires = require('express');
-const router = expires.Router();
+const express = require("express");
+const { isAuthenticated } = require("../middlewares/authSession");
+const { getProfile } = require("../controllers/profileControllers");
+const router = express.Router();
 
-
-router.get('/profile', isAuthenticated, getProfile);
+router.get("/profile", isAuthenticated, getProfile);
 
 module.exports = router;
