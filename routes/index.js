@@ -9,6 +9,8 @@ const signRouter = require("./sign");
 const profileRouter = require("./profile");
 const replyRouter = require("./reply");
 const questionRouter = require("./question");
+const categoriesRouter = require("./category");
+const { getAllCategories } = require("../controllers/categoryControllers");
 
 // Route utama
 router.get("/", (req, res) => {
@@ -30,5 +32,6 @@ router.use("/", signRouter);
 router.use("/", profileRouter);
 router.use("/", replyRouter);
 router.use("/", questionRouter);
+router.use("/", getAllCategories);
 
 module.exports = router;

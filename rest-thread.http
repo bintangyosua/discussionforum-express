@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/threads
+Content-Type: application/json
+
+{
+    "thread_id": "",
+    "thread_content": "Banana",
+    "question_id": 5,
+    "id_user": "hyoon"
+}

@@ -2,7 +2,7 @@ const { runQuery } = require("../config/database");
 
 // Fungsi untuk menambahkan thread baru
 exports.createThread = async (req, res) => {
-  const { thread_id, thread_title, thread_content, id_user } = req.body;
+  const { thread_id, thread_content, question_id, id_user } = req.body;
 
   const date = new Date();
   const year = date.getFullYear();
@@ -17,7 +17,7 @@ exports.createThread = async (req, res) => {
 
   try {
     const sql = "INSERT INTO thread VALUES (?, ?, ?, ?)";
-    const values = [thread_id, thread_title, thread_content, id_user];
+    const values = [thread_id, thread_content, question_id, id_user];
 
     await runQuery(sql, values);
 
@@ -62,13 +62,13 @@ exports.getThreadById = async (req, res) => {
 exports.updateThreadById = async (req, res) => {
   console.log("tes");
   const id = req.params.id;
-  const { thread_id, thread_title, thread_content } = req.body;
+  const { thread_id, question_id, thread_content } = req.body;
   console.log(id);
 
   try {
     const sql =
-      "UPDATE thread SET thread_content = ?, thread_title = ? WHERE thread_id = ?";
-    const values = [thread_content, thread_title, id];
+      "UPDATE thread SET thread_content = ?, question_id = ? WHERE thread_id = ?";
+    const values = [thread_content, question_id, id];
 
     await runQuery(sql, values);
 
