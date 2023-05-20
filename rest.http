@@ -1,0 +1,32 @@
+POST http://localhost:3000/api/questions/add-question
+Content-Type: application/json
+
+{
+    "question_id": "",
+    "question_content": "Some question",
+    "category_id": 1,
+    "id_user": "hyoon"
+}
+
+###
+GET http://localhost:3000/api/questions
+
+
+###
+GET http://localhost:3000/api/questions/1
+
+
+###
+PUT http://localhost:3000/api/questions/3/edit-question
+Content-Type: application/json
+
+{
+    "question_id": 3,
+    "question_content": "Change content",
+    "category_id": 3,
+    "id_user": "hyoon"
+}
+
+
+###
+DELETE http://localhost:3000/api/questions/4

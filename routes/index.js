@@ -8,6 +8,7 @@ const threadRouter = require("./thread");
 const signRouter = require("./sign");
 const profileRouter = require("./profile");
 const replyRouter = require("./reply");
+const questionRouter = require("./question");
 
 // Route utama
 router.get("/", (req, res) => {
@@ -28,5 +29,6 @@ router.use("/", threadRouter);
 router.use("/", signRouter);
 router.use("/", profileRouter);
 router.use("/", replyRouter);
+router.use("/", questionRouter);
 
 module.exports = router;
