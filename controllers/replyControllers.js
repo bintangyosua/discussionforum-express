@@ -1,7 +1,7 @@
 const { runQuery } = require("../config/database");
 
 exports.addReply = async (req, res) => {
-  const { reply_id, reply_content, id_user, thread_id, action } = req.body;
+  const { reply_id, reply_content, id_user, thread_id } = req.body;
 
   try {
     const sql = "INSERT INTO reply VALUES (?, ?, ?, ?)";
