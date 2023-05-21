@@ -12,9 +12,9 @@ module.exports.addQuestion = async (req, res) => {
 
   try {
     const values = [question_id, question_content, category_id, id_user];
-    await runQuery(insertQuery, values);
+    const response = await runQuery(insertQuery, values);
 
-    res.status(200).json({ message: "Question has been added." });
+    res.status(200).json(response);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -37,7 +37,10 @@ module.exports.getQuestionById = async (req, res) => {
   const question_id = req.params.question_id;
 
   try {
-    const sql = "SELECT * FROM question WHERE question_id = ?";
+    const sql = `SELECT question.*, category.category_name FROM question
+    INNER JOIN category
+    ON question.category_id = category.category_id
+    WHERE question_id = ?`;
     const values = [question_id];
 
     const result = await runQuery(sql, values);
@@ -55,8 +58,8 @@ module.exports.updateQuestion = async (req, res) => {
 
   try {
     const values = [question_content, category_id, id_user, qp_id];
-    await runQuery(updateQuery, values);
-    res.status(200).json({ message: "Question has been updated" });
+    const response = await runQuery(updateQuery, values);
+    res.status(200).json({ message: "Question Updated", response: response });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });

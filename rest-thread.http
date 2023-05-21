@@ -1,4 +1,8 @@
-POST http://localhost:3000/api/threads
+GET http://localhost:3000/api/questions/5/threads
+
+
+###
+POST http://localhost:3000/api/questions/52/threads
 Content-Type: application/json
 
 {
@@ -7,3 +11,4 @@ Content-Type: application/json
     "question_id": 5,
     "id_user": "hyoon"
 }
+
