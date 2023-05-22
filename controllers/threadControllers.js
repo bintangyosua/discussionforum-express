@@ -12,12 +12,14 @@ exports.createThread = async (req, res) => {
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const seconds = date.getSeconds().toString().padStart(2, "0");
   // Format datetime MySQL: YYYY-MM-DD HH:MM:SS
-  const thread_created = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  const thread_created_mysqltype = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  const thread_created = `${year}-${month}-${day}`;
   console.log(thread_created);
 
   try {
-    const sql = "INSERT INTO thread VALUES (?, ?, ?, ?)";
-    const values = [thread_id, thread_content, question_id, id_user];
+    const sql =
+      "INSERT INTO thread (thread_content, question_id, id_user, thread_created) VALUES (?, ?, ?, ?)";
+    const values = [thread_content, question_id, id_user, thread_created];
 
     const response = await runQuery(sql, values);
 

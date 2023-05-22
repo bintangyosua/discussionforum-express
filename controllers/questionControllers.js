@@ -1,7 +1,7 @@
 const insertQuery =
   "INSERT INTO question (question_id, question_content, category_id, id_user) VALUES (?, ?, ?, ?)";
 const updateQuery =
-  "UPDATE question SET question_content = ?, category_id = ?, id_user = ? WHERE question_id = ?";
+  "UPDATE question SET question_content = ?, category_id = ? WHERE question_id = ?";
 
 //? VALUELS
 
@@ -10,8 +10,21 @@ const { runQuery } = require("../config/database");
 module.exports.addQuestion = async (req, res) => {
   const { question_id, question_content, category_id, id_user } = req.body;
 
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+
+  const thread_created = `${year}-${month}-${day}`;
+
   try {
-    const values = [question_id, question_content, category_id, id_user];
+    const values = [
+      question_id,
+      question_content,
+      category_id,
+      id_user,
+      thread_created,
+    ];
     const response = await runQuery(insertQuery, values);
 
     res.status(200).json(response);
@@ -79,5 +92,20 @@ module.exports.deleteQuestionById = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).jsin({ message: "Internal Server Error" });
+  }
+};
+
+module.exports.getQuestionAnswerCount = async (req, res) => {
+  const question_id = req.params.question_id;
+
+  try {
+    const sql = "SELECT get_total_answer_count(?)";
+    const values = [question_id];
+
+    const result = await runQuery(sql, values);
+    res.status(200).json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };

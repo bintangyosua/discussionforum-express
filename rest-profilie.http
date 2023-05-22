@@ -1,0 +1,5 @@
+GET http://localhost:3000/api/profile/hyoon/questions
+
+###
+GET http://localhost:3000/api/profile/hyoon/threads
+
